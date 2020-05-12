@@ -4,7 +4,11 @@
   "description": "",
   "main": "src/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "micro",
+    "dev": "micro-dev",
+    "inspect": "node --inspect node_modules/.bin/micro-dev",
+    "lint": "eslint ./src"
   },
   "author": "Felipe Lube de Bragança",
   "license": "UNLICENSED",
