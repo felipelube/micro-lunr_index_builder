@@ -1,7 +1,7 @@
 const { send } = require('micro')
 
 const authenticate = require('./lib/auth')
-const buildIndex = require('./lib/validation')
+const buildIndex = require('./lib/searchIndex')
 const validate = require('./lib/validation')
 
 // TODO: timeout deve ser passado pelo cliente
@@ -32,5 +32,5 @@ const handleErrors = fn => async (req, res) => {
 module.exports = handleErrors(async (req, res) => {
   await authenticate(req, authToken)
   await validate(req)
-  buildIndex(req, indexFilePath)
+  await buildIndex(req, indexFilePath)
 })
