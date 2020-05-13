@@ -1,4 +1,5 @@
 const { send } = require('micro')
+const { ValidationError } = require('ajv')
 
 const authenticate = require('./lib/auth')
 const buildIndex = require('./lib/searchIndex')
@@ -23,6 +24,9 @@ const handleErrors = fn => async (req, res) => {
     }
     console.error(err.message)
     if (err.statusCode) {
+      if (err.originalError instanceof ValidationError) {
+        return send(res, err.statusCode, err.originalError.errors)
+      }
       return send(res, err.statusCode, err.message)
     }
     return send(res, 500, 'Erro interno do servidor')

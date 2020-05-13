@@ -1,0 +1,145 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "examples": [
+        {
+            "documents": [
+                {
+                    "id": 1
+                }
+            ],
+            "config": {
+                "searchFields": [
+                    "a",
+                    "b"
+                ],
+                "saveDocument": true
+            }
+        }
+    ],
+    "required": [
+        "documents",
+        "config"
+    ],
+    "additionalProperties": true,
+    "properties": {
+        "documents": {
+            "$id": "#/properties/documents",
+            "type": "array",
+            "title": "Documents",
+            "description": "The documents to index",
+            "default": [],
+            "examples": [
+                [
+                    {
+                        "id": 1
+                    }
+                ]
+            ],
+            "additionalItems": true,
+            "items": {
+                "anyOf": [
+                    {
+                        "$id": "#/properties/documents/items/anyOf/0",
+                        "type": "object",
+                        "title": "The first anyOf schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": {},
+                        "examples": [
+                            {
+                                "id": 1
+                            }
+                        ],
+                        "required": [
+                            "id"
+                        ],
+                        "additionalProperties": true,
+                        "properties": {
+                            "id": {
+                                "$id": "#/properties/documents/items/anyOf/0/properties/id",
+                                "type": "integer",
+                                "title": "The id schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": 0,
+                                "examples": [
+                                    1
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "$id": "#/properties/documents/items"
+            },
+            "minItems": 1
+        },
+        "config": {
+            "$id": "#/properties/config",
+            "type": "object",
+            "title": "The config schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {
+                    "searchFields": [
+                        "a",
+                        "b"
+                    ],
+                    "saveDocument": true
+                }
+            ],
+            "required": [
+                "searchFields",
+                "saveDocument"
+            ],
+            "additionalProperties": true,
+            "properties": {
+                "searchFields": {
+                    "$id": "#/properties/config/properties/searchFields",
+                    "type": "array",
+                    "title": "The searchFields schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": [],
+                    "examples": [
+                        [
+                            "a",
+                            "b"
+                        ]
+                    ],
+                    "additionalItems": true,
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$id": "#/properties/config/properties/searchFields/items/anyOf/0",
+                                "type": "string",
+                                "title": "The first anyOf schema",
+                                "description": "An explanation about the purpose of this instance.",
+                                "default": "",
+                                "examples": [
+                                    "a",
+                                    "b"
+                                ]
+                            }
+                        ],
+                        "$id": "#/properties/config/properties/searchFields/items"
+                    },
+                    "minLength": 1,
+                    "minItems": 1
+                },
+                "saveDocument": {
+                    "$id": "#/properties/config/properties/saveDocument",
+                    "type": "boolean",
+                    "title": "The saveDocument schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": false,
+                    "examples": [
+                        true
+                    ]
+                }
+            }
+        }
+    }
+}

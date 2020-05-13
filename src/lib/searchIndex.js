@@ -5,19 +5,15 @@ const fs = require('fs')
 
 module.exports = async (req, indexFilePath) => {
   const body = await json(req)
-  const searchFields = body.fields || ['title', 'teaser']
+  const { config } = body
 
-  if (!body || !Array.isArray(body) || !body.length) {
-    throw createError(400)
-  }
   const index = elasticLunr(function () {
-    this.addField('title')
-    this.addField('teaser')
+    config.searchFields.forEach(field => this.addField(field))
     this.setRef('id')
-    this.saveDocument(true)
+    this.saveDocument(config.saveDocument)
   })
   // FIXME: não falhar se um documento ou outro estiver fora do padrão - logar
-  body.forEach((item) => {
+  body.documents.forEach((item) => {
     index.addDoc(item)
   })
   fs.writeFileSync(indexFilePath, JSON.stringify(index))
