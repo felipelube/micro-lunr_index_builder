@@ -37,7 +37,7 @@ const handleErrors = fn => async (req, res) => {
 const main = async (req, res) => {
   await authenticate(req, authToken)
   await validate(req)
-  await buildIndex(req, indexFilePath)
+  await buildIndex(req, res, indexFilePath)
 }
 
 module.exports = handleErrors(async (req, res) => {

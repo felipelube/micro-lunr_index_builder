@@ -1,9 +1,9 @@
 const elasticLunr = require('elasticlunr')
 const { json } = require('micro')
-const { createError } = require('micro')
+const { send } = require('micro')
 const fs = require('fs')
 
-module.exports = async (req, indexFilePath) => {
+module.exports = async (req, res, indexFilePath) => {
   const body = await json(req)
   const { config } = body
 
@@ -17,4 +17,5 @@ module.exports = async (req, indexFilePath) => {
     index.addDoc(item)
   })
   fs.writeFileSync(indexFilePath, JSON.stringify(index))
+  return send(res, 200, 'Índice criado com sucesso.')
 }
