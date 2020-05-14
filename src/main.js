@@ -3,6 +3,7 @@ const { ValidationError } = require('ajv')
 
 const authenticate = require('./lib/auth')
 const buildIndex = require('./lib/searchIndex')
+const promiseTimeout = require('./lib/util')
 const validate = require('./lib/validation')
 
 // TODO: timeout deve ser passado pelo cliente
@@ -33,8 +34,12 @@ const handleErrors = fn => async (req, res) => {
   }
 }
 
-module.exports = handleErrors(async (req, res) => {
+const main = async (req, res) => {
   await authenticate(req, authToken)
   await validate(req)
   await buildIndex(req, indexFilePath)
+}
+
+module.exports = handleErrors(async (req, res) => {
+  await promiseTimeout(timeout, await main(req, res))
 })
