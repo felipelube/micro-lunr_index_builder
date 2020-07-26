@@ -7,5 +7,7 @@ RUN npm ci --only=production
 
 COPY . .
 
+USER 33
+
 EXPOSE 3000
 CMD [ "npm", "start" ]
