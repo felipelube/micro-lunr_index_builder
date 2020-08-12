@@ -24,6 +24,7 @@
   "dependencies": {
     "ajv": "^6.12.2",
     "elasticlunr": "^0.9.5",
+    "lunr-languages": "git+https://github.com/weixsong/lunr-languages.git",
     "micro": "^9.3.4",
     "parse-bearer-token": "^1.0.1"
   }

@@ -2,6 +2,8 @@ const elasticLunr = require('elasticlunr')
 const { json } = require('micro')
 const { send } = require('micro')
 const fs = require('fs')
+require('lunr-languages/lunr.stemmer.support')(elasticLunr)
+require('lunr-languages/lunr.pt')(elasticLunr)
 
 module.exports = async (req, res, indexFilePath) => {
   const body = await json(req)
@@ -9,6 +11,7 @@ module.exports = async (req, res, indexFilePath) => {
 
   const index = elasticLunr(function () {
     config.searchFields.forEach(field => this.addField(field))
+    this.use(elasticLunr.pt)
     this.setRef('id')
     this.saveDocument(config.saveDocument)
   })
