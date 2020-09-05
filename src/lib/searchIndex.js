@@ -1,7 +1,9 @@
 const elasticLunr = require('elasticlunr')
 const { json } = require('micro')
 const { send } = require('micro')
-const fs = require('fs')
+const mkdirp = require('mkdirp')
+const path = require('path')
+const fs = require('fs').promises
 const asciiFolder = require('fold-to-ascii')
 
 require('lunr-languages/lunr.stemmer.support')(elasticLunr)
@@ -30,6 +32,7 @@ module.exports = async (req, res, indexFilePath) => {
   body.documents.forEach((item) => {
     index.addDoc(item)
   })
-  fs.writeFileSync(indexFilePath, JSON.stringify(index))
+  await mkdirp(path.dirname(indexFilePath))
+  await fs.writeFile(indexFilePath, JSON.stringify(index))
   return send(res, 200, 'Índice criado com sucesso.')
 }
