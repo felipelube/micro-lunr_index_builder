@@ -13,6 +13,8 @@ function promiseTimeout (ms, promise) {
   ]).then((result) => {
     clearTimeout(timer)
     return result
+  }).catch(() => {
+    clearTimeout(timer)
   })
 }
 
