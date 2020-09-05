@@ -1,5 +1,10 @@
 // http://disq.us/p/1k8w63m
-function promiseTimeout (ms, promise) {
+/**
+ * Função que executa uma promessa em até determinado timeout. Se o timeout extrapolar, a função inteira falha.
+ * @param {*} ms
+ * @param {*} promise
+ */
+module.exports = (ms, promise) => {
   let timer
   const timeout = new Promise((resolve, reject) => {
     timer = setTimeout(() => {
@@ -13,7 +18,7 @@ function promiseTimeout (ms, promise) {
   ]).then((result) => {
     clearTimeout(timer)
     return result
+  }).catch(() => {
+    clearTimeout(timer)
   })
 }
-
-module.exports = promiseTimeout

@@ -27,6 +27,7 @@
     "fold-to-ascii": "^5.0.0",
     "lunr-languages": "git+https://github.com/weixsong/lunr-languages.git",
     "micro": "^9.3.4",
+    "mkdirp": "^1.0.4",
     "parse-bearer-token": "^1.0.1"
   }
 }
