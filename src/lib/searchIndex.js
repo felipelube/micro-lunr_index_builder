@@ -34,5 +34,6 @@ module.exports = async (req, res, indexFilePath) => {
   })
   await mkdirp(path.dirname(indexFilePath))
   await fs.writeFile(indexFilePath, JSON.stringify(index))
+  console.log('Índice criado com sucesso.')
   return send(res, 200, 'Índice criado com sucesso.')
 }
