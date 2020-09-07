@@ -8,13 +8,12 @@ const asciiFolder = require('fold-to-ascii')
 
 require('lunr-languages/lunr.stemmer.support')(elasticLunr)
 require('lunr-languages/lunr.pt')(elasticLunr)
+const replaceDiacritics = token => asciiFolder.foldReplacing(token)
+elasticLunr.Pipeline.registerFunction(replaceDiacritics, 'replaceDiacritics')
 
 module.exports = async (req, res, indexFilePath) => {
   const body = await json(req)
   const { config } = body
-
-  const replaceDiacritics = token => asciiFolder.foldReplacing(token)
-  elasticLunr.Pipeline.registerFunction(replaceDiacritics, 'replaceDiacritics')
 
   const index = elasticLunr(function () {
     config.searchFields.forEach(field => this.addField(field))
