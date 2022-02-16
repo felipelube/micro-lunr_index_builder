@@ -22,7 +22,7 @@
     "micro-dev": "^3.0.0"
   },
   "dependencies": {
-    "ajv": "^6.12.2",
+    "ajv": "^6.12.3",
     "elasticlunr": "^0.9.5",
     "fold-to-ascii": "^5.0.0",
     "lunr-languages": "git+https://github.com/weixsong/lunr-languages.git",
